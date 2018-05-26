@@ -14,6 +14,9 @@
 <body class="text-center">
     <div class="sample">
           <h1 class="h3 mb-3 font-weight-normal">Поиск</h1>
+          <label for="inputSite" class="sr-only">Сайт</label>
+          <input type="text" id="inputSite" class="form-control" placeholder="Сайт" v-model="site" required autofocus>
+
           <label for="inputkey" class="sr-only">Ключ</label>
           <input type="text" id="inputkey" class="form-control" placeholder="Ключ" v-model="key" required autofocus>
 
@@ -37,12 +40,14 @@
             el: '.sample',
             data: {
                 key: '',
-                res: ''
+                res: '',
+                site: ''
             },
             methods: {
                 post: function(){
                     axios.post('https://fast-taiga-53748.herokuapp.com/key', {
-                        key: 'Ключ: ' + this.key
+                        key: this.key,
+                        site: this.site
                     })
                     .then(response => (this.res = response.data, console.log(response)))
                     //this.res = response.data;
